@@ -1,36 +1,34 @@
-# Tower-of-hanoi
-The Tower of Hanoi is a classic mathematical puzzle that demonstrates the concept of recursion in computer programming. This project provides a C program (or any other language you choose) to solve the Tower of Hanoi problem by moving a set of disks from one rod to another following specific rules.
-# 🏗️ Tower of Hanoi Project
+#include <stdio.h>
 
-## 📘 Project Overview
-The **Tower of Hanoi** is a classic mathematical puzzle that demonstrates the concept of **recursion** in programming.  
-This project provides a program to solve the Tower of Hanoi problem by moving a set of disks between three rods according to specific rules.
+// Recursive function to solve Tower of Hanoi
+void towerOfHanoi(int n, char source, char auxiliary, char destination) {
+    if (n == 1) {
+        printf("Move disk 1 from %c → %c\n", source, destination);
+        return;
+    }
 
----
+    // Move (n-1) disks from source to auxiliary
+    towerOfHanoi(n - 1, source, destination, auxiliary);
 
-## 🎯 Objective
-To implement the Tower of Hanoi algorithm using **recursion** and display each step involved in transferring disks from the source rod to the destination rod.
+    // Move the largest disk from source to destination
+    printf("Move disk %d from %c → %c\n", n, source, destination);
 
----
+    // Move (n-1) disks from auxiliary to destination
+    towerOfHanoi(n - 1, auxiliary, source, destination);
+}
 
-## 🧩 Problem Statement
-You are given three rods — **A (Source)**, **B (Auxiliary)**, and **C (Destination)** — and **n disks** of different sizes stacked in ascending order on rod A (smallest on top).  
-The task is to move all disks from **A** to **C** following these rules:
+int main() {
+    int n;
 
-1. Only one disk can be moved at a time.  
-2. A disk can only be placed on top of a larger disk or an empty rod.  
-3. All disks must end up on the destination rod in the same order.
+    printf("Enter number of disks: ");
+    scanf("%d", &n);
 
----
+    printf("\nSteps to solve Tower of Hanoi:\n\n");
+    towerOfHanoi(n, 'A', 'B', 'C');
 
-## 💡 Algorithm
-1. Move (n-1) disks from Source to Auxiliary.  
-2. Move the nth (largest) disk from Source to Destination.  
-3. Move (n-1) disks from Auxiliary to Destination.  
+    printf("\nTotal number of moves: %d\n", (1 << n) - 1); // 2^n - 1 formula
 
-This recursive pattern continues until only one disk remains to move.
+    return 0;
+}
 
----
-
-## 🧠 Example Output
 
